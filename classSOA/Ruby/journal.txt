@@ -49,3 +49,57 @@ config = { foo: 123, bar: 456 } # 等同於 { :foo => 123, :bar => 456 }
 6.":"symbol:
 config = { :foo => 123, :bar => 456 } puts config[:foo] # 輸出 123
 object_id方法會回傳Ruby內部的記憶體配置編號，你會發現相同內容的字串，也會是不同的新物件，但是Symbol不會。這種特性讓Symbol的主要用途是當做Hash的鍵
+2013.10.13
+1.else if寫成elsif
+2.只有false和nil是假其他都為真
+3.使用def開頭end結尾來定義一個方法，方法中的return是可以省略的，Ruby就會回傳最後一行運算的值
+4."!""?":
+array=[2,1,3]
+array.empty? # false array.sort # [1,2,3]
+array.inspect # [2,1,3]
+array.sort! # [1,2,3] array.inspect # [1,2,3]
+5.所有的物件變數(@開頭)、類別變數(@@開頭)，都是封裝在類別內部的，類別外無法存取
+6.class Person # 大寫開頭的常數
+     def initialize(name) # 建構式 
+        @name = name # 物件變數 
+     end
+     def say(word) puts "#{word}, #{@name}" # 字串相加 
+     end
+   end
+7.
+p1 = Person.new("ihower") 
+p2 = Person.new("ihover")
+p1.say("Hello") # 輸出 Hello, ihower 
+p2.say("Hello") # 輸出 Hello, ihover
+8.Ruby使用小於<符號代表類別繼承
+languages = ['Ruby', 'Javascript', 'Perl'] 
+languages.each do |lang| 
+puts "I love #{lang}!" 
+end 
+# I Love Ruby! 
+# I Love Javascript! 
+# I Love Perl!
+9.# 反覆三次 
+3.times do puts 'Good Job!' end 
+# Good Job! # Good Job! # Good Job!
+# 從一數到九 1.upto(9) { |x| puts x }
+# 多一個索引區塊變數 
+languages = ['Ruby', 'Javascript', 'Perl'] 
+languages.each_with_index do |lang, i| 
+puts "#{i}, I love #{lang}!" 
+end 
+# 0, I Love Ruby! # 1, I Love Javascript! # 2, I Love Perl!
+10.# 迭代並造出另一個陣列 
+a = [ "a", "b", "c", "d" ] 
+b = a.map {|x| x + "!" } 
+puts b.inspect
+# 結果是 ["a!", "b!", "c!", "d!"]
+# 找出符合條件的值 
+b = [1,2,3].find_all{ |x| x % 2 == 0 } 
+b.inspect # 結果是 [2]
+# 迭代並根據條件刪除 a = [51, 101, 256] a.delete_if {|x| x >= 100 } 
+# 結果是 [51]
+# 客製化排序 [2,1,3].sort! { |a, b| b <=> a } 
+# 結果是 [3, 2, 1]
+# 計算總和 (5..10).inject {|sum, n| sum + n }
+# 找出最長字串find the longest word longest = ["cat", "sheep", "bear"].inject do |memo,word| ( memo.length > word.length )? memo : word end
