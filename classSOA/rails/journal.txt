@@ -20,4 +20,11 @@ script/ 放rails這個指令和放其他的script指令
 test/ 單元測試、fixtures及整合測試等程式 
 tmp/ 暫時性的檔案 
 vendor/ 用來放第三方程式碼外掛的目錄
+2013.10.11
+1.Rails使用了一套叫做Bundler的工具可以幫助我們檢查及安裝這個Rails應用程式所有依存的套件，請輸入： 
+$ bundle install 
+可以只輸入bundle就是bundle install了
+每次有修改Gemfile這個檔案，都需要重新執行bundle
+2.在開發用的電腦上，我們不需要安裝如Apache、IIS的網站伺服器。Ruby本身就有提供了HTTP伺服器可以執行Rails，要啟動它，我們另開啟一個指令視窗，cd進到剛剛建立的Rails專案目錄然後輸入:
+$ rails server
 
