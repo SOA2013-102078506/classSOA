@@ -19,3 +19,33 @@ puts var1.reverse # 'pots'
 puts var2.length # 6 
 puts var3.upcase 
 puts var3.downcase
+2013.10.12
+1.剛剛提到數字和字串物件不能直接相加，你必須使用to_s(轉成字串)、to_i(轉成整數)或to_f(轉成浮點數)來手動轉型，範例如下： 
+var1 = 2 
+var2 = '5' 
+puts var1.to_s + var2 # 25 
+puts var1 + var2.to_i # 7 
+puts 9.to_f / 2 # 4.5
+2.空值nil
+3.註釋 # this is a comment line
+4.array:
+a = [ 1, "cat", 3.14 ]
+puts a[0] # 輸出 1 
+puts a.size # 輸出 3
+a[2] = nil 
+puts a.inspect # 輸出 [1, "cat", nil] 
+a[99] # nil
+colors = ["red", "blue"]
+colors.push("black") 
+colors << "white" 
+puts colors.join(", ") # red, blue, black, white
+colors.pop 
+puts colors.last #black
+5.Hash是一種鍵值對(Key-Value)的資料結構，使用大括號：
+config = { "foo" => 123, "bar" => 456 } 
+puts config["foo"] # 輸出 123 
+config["nothing"] # 是 nil
+config = { foo: 123, bar: 456 } # 等同於 { :foo => 123, :bar => 456 }
+6.":"symbol:
+config = { :foo => 123, :bar => 456 } puts config[:foo] # 輸出 123
+object_id方法會回傳Ruby內部的記憶體配置編號，你會發現相同內容的字串，也會是不同的新物件，但是Symbol不會。這種特性讓Symbol的主要用途是當做Hash的鍵
