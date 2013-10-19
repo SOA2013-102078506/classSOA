@@ -43,5 +43,18 @@ Movie.all (看movie裡面的資料)
 7.出現 ActiveModel::MassAssignmentSecurity::Error 錯誤？ 修改 config/application.rb 的 config.active_record.whitelist_attributes 設定為 false
 8.擴充Template Handler
 Rails預設只有內建ERb和Builder這兩套樣板引擎，但要擴充非常容易。例如在Rails社群中，也很流行用HAML這套樣板引擎來取代ERb。HAML是一套利用縮排技術簡化HTML撰寫的格式
+2013.10.18
+1.如果要偵測error可以利用RASP方法
+Read Ask Search Post
+2.可以看log/development.log去看裡面的error狀況
+3.另一種方法是insert instrumentation
+=debug(@movie) or =@movie.inspect
+ex. raise params.inspect 
+logger.debug (message)
+rails server --debugger
+2013.10.19
+1.form_tag 連http的method，利用rake routes可看到
+2.params這個表格
+3.redirect_to 到某個地方
 
 
