@@ -1,4 +1,5 @@
 Myrottenpotatoes::Application.routes.draw do
+devise_for :moviegoers, :controllers => { :omniauth_callbacks => "moviegoers/omniauth_callbacks" }
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -57,11 +58,10 @@ Myrottenpotatoes::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
   
 
-      resources :movies
-      root :to => redirect('/movies')
-    
-get  'auth/:provider/callback' => 'sessions#create',:as => 'login'
-post 'logout' => 'sessions#destroy'
-get  'auth/failure' => 'sessions#failure'
-
+     # resources :movies
+    root :to => redirect('/movies')
+    resources :movies do
+      resources :reviews
+    end
+ 
 end

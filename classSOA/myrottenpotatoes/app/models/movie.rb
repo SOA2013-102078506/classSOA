@@ -1,5 +1,6 @@
 class Movie < ActiveRecord::Base
 before_save :capitalize_title
+
   def capitalize_title
     self.title = self.title.split(/\s+/).map(&:downcase).
       map(&:capitalize).join(' ')
@@ -16,14 +17,19 @@ before_save :capitalize_title
   end
   @@grandfathered_date = Date.parse('1 Nov 1968')
   def grandfathered? ; self.release_date >= @@grandfathered_date ; end
+ has_many :reviews
+ scope :with_good_reviews, lambda { |threshold|
+    Movie.joins(:reviews).group(:movie_id).
+      having(['AVG(reviews.potatoes) > ?', threshold])
+  }
+  scope :for_kids, lambda {
+    Movie.where('rating in ?', %w(G PG))
+  }
+  def movies_with_good_reviews
+    @movies = Movie.joins(:reviews).group(:movie_id).
+      having('AVG(reviews.potatoes) > 3')
+  end
+  def movies_for_kids
+    @movies = Movie.where('rating in ?', %w(G PG))
+  end
 end
-# try in console:
-m = Movie.create!(:title => 'STAR  wars', :release_date => '27-5-1977')
-m.title  # => "Star Wars"
-m = Movie.new(:title => '', :rating => 'RG', :release_date => '1929-01-01')
-# force validation checks to be performed:
-m.valid?  # => false
-m.errors[:title] # => ["can't be blank"]
-m.errors[:rating] # => ["is not included in the list"]
-m.errors[:release_date] # => ["must be 1930 or later"]
-m.errors.full_messages # => ["Title can't be blank", "Rating is not included in the list", "Release date must be 1930 or later"]
