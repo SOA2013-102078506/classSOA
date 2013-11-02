@@ -56,5 +56,66 @@ rails server --debugger
 1.form_tag 連http的method，利用rake routes可看到
 2.params這個表格
 3.redirect_to 到某個地方
-
+2013.10.31 
+http://pastebin.com/WbA2ArgW
+facebook guideline-how to facebook log in
+#Add OmniAuth OAuth to Gemfile:
+gem 'omniauth'
+gem 'omniauth-facebook' 
+#Run the bundle command to install it.
+bundle install
+# Add the Devise option :omniauthable to your Moviegoer model (app/models/moviegoer.rb) devise :database_authenticatable, :registerable, :omniauthable, :omniauth_providers => [:facebook],
+        :recoverable, :rememberable, :trackable, :validatable 
+#Add columns "provider", "uid" and "name" to your Moviegoer model.
+rails g migration AddColumnsToMoviegoers provider uid name
+rake db:migrate
+#Add :provider, :uid, :name to moviegoer.rb
+attr_accessible :provider, :uid, :name
+# Edit the Devise config file with your credentials in /config/initializers/devise.rb
+# The APP_ID & APP_SECRET you will get it from Facebook developer  https://developers.facebook.com
+# Guide picture:  http://i.imgur.com/7Qe7JQE.png
+require "omniauth-facebook"
+config.omniauth :facebook, "APP_ID", "APP_SECRET"
+#Add this in routes.rb , and delete all the other devise_for
+devise_for :moviegoers, :controllers => { :omniauth_callbacks => "moviegoers/omniauth_callbacks" }
+#Now we just add the file "app/controllers/moviegoers/omniauth_callbacks_controller.rb"
+class Moviegoers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  def facebook
+    # You need to implement the method below in your model (e.g. app/models/moviegoer.rb)
+    @moviegoer = Moviegoer.find_for_facebook_oauth(request.env["omniauth.auth"], current_moviegoer) 
+    if @moviegoer.persisted?
+      sign_in_and_redirect @moviegoer, :event => :authentication #this will throw if @moviegoer is not activated
+      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+    else
+      session["devise.facebook_data"] = request.env["omniauth.auth"]
+      redirect_to new_moviegoer_registration_url
+    end
+  end
+end
+#After the controller is defined, we need to implement the find_for_facebook_oauth method in our model (e.g. app/models/moviegoer.rb):
+#This method simply tries to find an existing moviegoer by uid or create one with a random password otherwise. 
+def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  moviegoer = Moviegoer.where(:provider => auth.provider, :uid => auth.uid).first
+  unless moviegoer
+    moviegoer = Moviegoer.create(name:auth.extra.raw_info.name,
+                         provider:auth.provider,
+                         uid:auth.uid,
+                         email:auth.info.email,
+                         password:Devise.friendly_token[0,20]
+                         )
+  end
+  moviegoer
+ end
+ def self.new_with_session(params, session)
+    super.tap do |moviegoer|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        moviegoer.email = data["email"] if moviegoer.email.blank?
+      end
+    end
+  end
+2013.11.1
+如何把facebook的帳號密碼不會上傳到github
+用nano編輯
+找到"ls -al"再裡面新增你要忽略的那個檔案的路徑
+這樣可以上傳的時候不會上傳那個檔案
 
