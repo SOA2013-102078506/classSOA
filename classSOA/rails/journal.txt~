@@ -115,7 +115,7 @@ def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   end
 2013.11.1
 如何把facebook的帳號密碼不會上傳到github
-用nano編輯 .gitignore
+用nano編輯
 找到"ls -al"再裡面新增你要忽略的那個檔案的路徑
 這樣可以上傳的時候不會上傳那個檔案
 
