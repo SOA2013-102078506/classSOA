@@ -125,17 +125,4 @@ def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
 3.rails generate cucumber:install
 rails generate cucumber_rails_training_wheels:install
 會在myrottenpotatoes/features/step_definitions/web_steps.rb裡
-4.rake routes 可查詢可使用的工具
-2013.11.3
-7.6
-1.到Gemfile改gem 'cucumber-rails', :require => false  
-再來rake db:test:prepare
-2.進movie controller把before_filter那一行先註解掉
-然後path.rb裡面要有這兩個
-(改成MyRottenpotatoes、create的路徑)
-    when /^the MyRottenPotatoes home page/
-        movies_path
-    when /^the Create New Movie page/
-        new_movie_path
-每個都要改成MyRottenPotatoes(paths feature)
 
