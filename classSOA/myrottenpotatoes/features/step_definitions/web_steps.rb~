@@ -267,12 +267,3 @@ Then /I should see "(.*)" before "(.*)" on (.*)/ do |string1, string2, path|
   regexp = /#{string1}.*#{string2}/m #  /m means match across newlines
   page.body.should =~ regexp
 end
-Then(/^I should see "(.*?)" before "(.*?)"$/) do |arg1, arg2|
-  if page.respond_to? :should
-    page.should have_content(arg1)
-    page.should have_content(arg2)
-  else
-    assert page.has_content?(arg1)
-    assert page.has_content?(arg2)
-  end
-end

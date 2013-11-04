@@ -56,7 +56,9 @@ devise_for :moviegoers, :controllers => { :omniauth_callbacks => "moviegoers/omn
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-  
+
+# Route that posts 'Search TMDb' form
+post '/movies/search_tmdb'  
 
      # resources :movies
     root :to => redirect('/movies')
