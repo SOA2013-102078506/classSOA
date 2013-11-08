@@ -5,6 +5,16 @@ gem 'rails', '3.2.14'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'heroku'
+ 
+  group :development, :test do
+     gem 'debugger'
+     gem 'sqlite3' # use SQLite only in development and testing
+  end
+  group :production do
+     gem 'pg' # use PostgreSQL in production (Heroku)
+  end
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -35,25 +45,17 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-# Add by textbook 4.1
-        # Use Haml for templates
-        gem 'haml'
-        # Use Ruby debugger
-        group :development, :test do
-                gem 'debugger'
-    gem 'sqlite3' # use SQLite only in development and testing
-end
-group :production do
-  gem 'pg' # use PostgreSQL in production (Heroku)
-end
+# use Haml for templates
+gem 'haml'
+# use Ruby debugger
 
-        gem 'omniauth-twitter'
-        gem 'omniauth-facebook'
-        gem 'devise'
-        gem 'figaro'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
+# add to end of Gemfile
 group :test, :development do
-  gem 'cucumber-rails', :require => false
+gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels' # some pre-fabbed step definitions  
   gem 'database_cleaner' # to clear Cucumber's test database between runs
   gem 'capybara'         # lets Cucumber pretend to be a web browser

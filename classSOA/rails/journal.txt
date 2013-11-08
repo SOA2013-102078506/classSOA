@@ -138,4 +138,40 @@ rails generate cucumber_rails_training_wheels:install
     when /^the Create New Movie page/
         new_movie_path
 每個都要改成MyRottenPotatoes(paths feature)
-
+2013.11.4
+上傳到Heroku
+1.首先設定環境變數 APP_ID&APP_SECRET
+到cd etc 裡面分別輸入APP_ID&APP_SECRET
+etc/sudo nano  environment
+2.編輯Gemfile
+gem 'heroku'
+ 
+  group :development, :test do
+     gem 'debugger'
+     gem 'sqlite3' # use SQLite only in development and testing
+  end
+  group :production do
+     gem 'pg' # use PostgreSQL in production (Heroku)
+  end
+3.commit bundle install
+4.heroku create classsoa --stack cedar
+創造一個heroku app
+5.go config/application.rb and set the following 
+config.assets.initialize_on_precompile = false
+6.要確定兩件事情
+# 1.Go config/initializers/devise.rb and reset the APP_ID and APP_secret back to original
+     config.omniauth :facebook, ENV['APP_ID'], ENV['APP_SECRET']
+# 2.Go Facebook Developer and create a new APP just for heroku , cause the original is for localhost:3000
+7.上傳heroku步驟
+ git init
+ git add .
+ git commit -m “heroku”
+ git remote add heroku git@heroku.com:(app名稱).git     
+ git push heroku master
+8.heroku run:detached rake db:migrate
+重新跑資料庫，資料會清空
+9.heroku config:set APP_ID="your APP_ID" APP_SECRET="your APP_SECRET "
+*如果發現沒有上傳成功
+似乎是因為資料庫沒用好
+所以輸入rollback10步
+讓他還全回去 再seed進去即可
