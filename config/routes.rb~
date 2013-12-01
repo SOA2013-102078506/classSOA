@@ -1,7 +1,7 @@
 SoaSvsb::Application.routes.draw do
 
 	root :to => "request#index"
-	resources :request
+	resources :requests
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
