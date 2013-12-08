@@ -72,7 +72,7 @@ SoaSvsb::Application.configure do
     :domain => "gmail.com",
     :authentication => "plain",
     :user_name => "soasvsb@gmail.com",
-    :password => "soasvsbb"
+    :password => "soasvsbb",
     :enable_starttls_auto => true
  }
 end
