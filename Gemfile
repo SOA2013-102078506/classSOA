@@ -39,6 +39,8 @@ group :test, :development do
 	gem 'rspec-rails'
 end
 
+gem 'heroku'
+
 gem 'devise'
 
 gem 'omniauth'
