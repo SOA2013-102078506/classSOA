@@ -20,5 +20,8 @@
     <%= f.label :pic_id, "Picture Upload" %>
     <%= f.text_field :pic_id %>
 		</br>
+
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+
     <%= f.submit "Create" %>
 <% end %>

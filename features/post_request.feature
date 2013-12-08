@@ -1,13 +1,24 @@
-Feature: Sign Up
+Feature: Post New Product Request
 As a User of the Service,
-So that I can share costs of buying a product in bulk with other people in my area
-I want to sign up on the Group Purchase website
-Scenario: Signing up to Group Purchase (sad path)
-Given I am on the Group Purchase home page
-Then I should see "Sign Up" hyperlink
-When I click on "Sign Up "a Sign Up page should appear
-Then I fill in "User name", “email address”, “create password”, “country”, “city” and
-select gender
+So that I can ask someone to buy or join in buying a specific brand that I want at a specific maximum price and time frame,
+I want to post a new product request
+
+Scenario: Try to add new product request (Happy Path)
+Given I am on the “My User” page
+ Then I should see "Post New Request" 
+When I press "Post New Request"
+Then I should be on the New Request page
+When I fill in "Product name", "Deadline", "Description", “Quantity”  “Max price”  “Location” 
 And I press "Submit"
-Then I should be on the Group Purchase home page
-And I should see "Welcome User Name "
+Then I should be on the “Request Content” page
+And I should see newly created Product page
+
+Scenario: Try to add new product request (Sad Path)
+Given I am on the “My User” page
+ Then I should see "Post New Request" 
+When I press "Post New Request"
+Then I should be on the New Request page
+When I fill in "Product name", "Deadline", "Description", “Quantity”  “Max price”  “Location”
+And I press "Submit"
+Then I should be on the “Post New Request” page
+And I should see “Request Post Unsuccessful. Please fill in all required Fields” 

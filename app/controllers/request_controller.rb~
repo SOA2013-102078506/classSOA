@@ -1,5 +1,7 @@
 class RequestController < ApplicationController
 
+	before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
+
 	def index
   	@request = Request.all
 	end
@@ -30,7 +32,7 @@ class RequestController < ApplicationController
   	@request = Request.find(params[:id])
 	end
 
-	def delete
+	def destroy
 		@request = Request.find(params[:id])
 		@request.destroy
 
