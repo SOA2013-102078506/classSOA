@@ -28,7 +28,7 @@ end
 
 group :test, :development do
 	gem 'debugger'
-  gem 'sqlite3' # use SQLite only in development and testing
+	gem 'sqlite3','~>1.3.8' # use SQLite only in development and testing
 
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels' # some pre-fabbed step definitions  
@@ -38,6 +38,8 @@ group :test, :development do
 
 	gem 'rspec-rails'
 end
+
+gem 'heroku'
 
 gem 'devise'
 
