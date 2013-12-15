@@ -12,7 +12,7 @@ Scenario: Try to negotiate an appropriate time for receiving my requested produc
 	Then I can press the “Mailbox” button on the profile page
   And I should be allowed to send private message to specified user(buyer)
 
-Sad path: Try to negotiate an appropriate time for receiving my requested product
+Sad path: Try to send a private message instead of leaving a comment on the request content page
 	Given I am on the request content page and want to send message to the buyer
 	But I don't want to leave comments which is public to everyone
 Then I move my mouse cursor to the buyer profile icon showing on the same page

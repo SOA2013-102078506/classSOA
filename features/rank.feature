@@ -19,4 +19,3 @@ Sad path: Forget to rank the buyer
 	And I press "yes/no" button
   Then I should be still on the same page
   And I should see the result of my ranking
-

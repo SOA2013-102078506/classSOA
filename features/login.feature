@@ -17,4 +17,4 @@ Given I am on the Group Purchase home page
  When I fill in "Username" and "Password" that do not match
 And I press "Log in"
 Then I should be on the Group Purchase home page
-And I should see “Uncorrect User Name and Password” 
+And I should see ‘Incorrect User Name and Password’

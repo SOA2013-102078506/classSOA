@@ -11,7 +11,7 @@ Scenario: Try to update my profile contents
 	And I can change email or upload a new profile photo on the profile page
   And I should see my profile is successfully changed
 
-Sad path: Try to update my profile contents
+Sad path: Try to upload a profile photo which size is too small/large
   Given I am on MyPage (personal customized page)
   Then I should see there are tabs I can switch to “profile” page.
   When I select “profile” tab

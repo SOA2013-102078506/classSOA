@@ -11,7 +11,7 @@ Scenario: Try to change my password
 	And I can press the “Change password” button on the profile page
   And I should be allowed to type new password after verifying my identity. 
 
-Sad path: Try to change my password
+Sad path: Try to change a password which is the same as the original one
 	Given I am on MyPage (personal customized page)
   Then I should see there are tabs I can switch to “profile” page.
   When I select “profile” tab

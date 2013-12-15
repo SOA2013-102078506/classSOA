@@ -3,7 +3,7 @@ As a [user],
 So that [I can check details about my reputation], 
 I want to [view detailed information about ranking scores]
 
-Scenario: Try to find out more detailed information about my ranking score
+Scenario: Try to find out more detailed information about ranking
 	Given I am on MyPage (personal customized page)
   Then I should see there are tabs I can switch to “profile” page.
   When I select “profile” tab
@@ -12,7 +12,7 @@ Scenario: Try to find out more detailed information about my ranking score
 	Then I can press the “view” button on the profile page
   And I should see pie chart, detailed quantity information in a pop-out window 
 
-Sad path: Try to find out more detailed information about my ranking score
+Sad path: Try to find out more detailed information about ranking score though the presented score
 	Given I am on MyPage (personal customized page)
   Then I should see there are tabs I can switch to “profile” page.
   When I select “profile” tab
