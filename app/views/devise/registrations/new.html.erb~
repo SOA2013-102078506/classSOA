@@ -3,17 +3,16 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name, :autofocus => true %></div>
-
-  <div>	<%= f.label :gender %><br />
-				<%= f.radio_button :gender, '1', :checked=>"checked"%> man
-				<%= f.radio_button :gender, '0'%> woman
-	</div>
-
   <div><%= f.label :pic %><br />
   <%= f.file_field :pic_id %></div>
 
+  <div><%= f.label :name %><br />
+  <%= f.text_field :name, :autofocus => true %></div>
+
+  <div>	<%= f.label :gender %>
+				<%= f.radio_button :gender, '1', :checked=>"checked"%> man
+				<%= f.radio_button :gender, '0'%> woman
+	</div>
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
